@@ -12,6 +12,12 @@ body {
 	height: 470px;
 }
 
+#indexmap {
+  width: 550px;
+  height: 470px;
+  text-align: center;
+}
+
 .header,
 .marketing,
 .footer {

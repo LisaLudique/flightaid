@@ -4,13 +4,13 @@
 		{% include 'head.html' %}
 	</head>
 	<body>
-		<div class='container'>
+		<div class='container' id='refresh-vehicle'>
 			{% import 'header.html' as header %}
 			<div class='header'>
 				<nav>
 					{{ header.navigation(options.menu, options.current_url, 'nav nav-pills pull-right') }}
 				</nav>
-				<h3 class='text-muted'>DroneAPI Demos {{options.current_url}} </h3>
+				<h3 class='text-muted'>Flight Aid</h3>
 			</div>
 			<div class='row marketing'>
 				{% import 'mapbox.html' as mapbox%}
@@ -27,12 +27,12 @@
 						<div class='form-group'>
 							<input disabled class='form-control' type="text" name="lon" id="lon" placeholder="Longitude" value="{{ options.current_coords[1] }}" />
 						</div>
-						<button id='refresh-vehicle' class='btn btn-default'>Update</button>
+						<button class='btn btn-default'>Update</button>
 					</form>
 				</div>
 			</div>
 			<footer class='footer'>
-				<p>&copy; 3D Robotics Inc.</p>
+				<p>&copy; Elif, Lisa, Adam, Jess | Thanks to DroneKit!</p>
 			</footer>
 		</div>
 		{% include 'bottom-scripts.html' %}
@@ -64,7 +64,7 @@
 				options.home_coords.reverse()
 				options.current_coords = fixCoords(options.current_coords);
 
-				$('#refresh-vehicle').bind('click', function(event){
+				$('#refresh-vehicle').bind('mouseover', function(event){
 					event.preventDefault();
 					$.getJSON('/vehicle', function(data){
 						console.log('[Update] home: ', options.home_coords, ' vehicle: ', data.position);

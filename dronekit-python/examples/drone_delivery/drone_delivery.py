@@ -165,7 +165,7 @@ class Templates:
         return {
                 'width': 670,
                 'height': 470,
-                'zoom': 19,
+                'zoom': 17,
                 'format': 'png',
                 'access_token': 'pk.eyJ1Ijoia2V2aW4zZHIiLCJhIjoiY2lrOGoxN2s2MDJzYnR6a3drbTYwdGxmMiJ9.bv5u7QgmcJd6dZfLDGoykw',
                 'mapid': 'kevin3dr.n56ffjoo',
@@ -179,9 +179,10 @@ class Templates:
                 'json': ''
                 }
 
-    def index(self):
+    def index(self, current_coords):
         self.options = self.get_options()
         self.options['current_url'] = '/'
+        self.options['current_coords'] = current_coords
         return self.get_template('index')
 
     def track(self, current_coords):
@@ -208,7 +209,7 @@ class DroneDelivery(object):
 
     @cherrypy.expose
     def index(self):
-        return self.templates.index()
+        return self.templates.index(self.drone.get_location())
 
     @cherrypy.expose
     def command(self):
@@ -220,7 +221,7 @@ class DroneDelivery(object):
         return dict(position=self.drone.get_location())
 
     @cherrypy.expose
-    def track(self, lat=None, lon=None):
+    def track(self, lat=None, lon=None, name=None, medicine=None):
         # Process POST request from Command
         # Sending MAVLink packet with goto instructions
         if(lat is not None and lon is not None):
