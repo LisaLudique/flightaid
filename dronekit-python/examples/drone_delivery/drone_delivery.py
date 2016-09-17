@@ -173,7 +173,6 @@ class Templates:
                 'menu': [
                     {'name': 'Home', 'location': '/'},
                     {'name': 'Track', 'location': '/track'},
-                    {'name': 'Command', 'location': '/command'}
                     ],
                 'current_url': '/',
                 'json': ''

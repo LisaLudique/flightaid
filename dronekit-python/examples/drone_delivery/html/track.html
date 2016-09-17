@@ -64,15 +64,14 @@
 				options.home_coords.reverse()
 				options.current_coords = fixCoords(options.current_coords);
 
-				$('#refresh-vehicle').bind('mouseover', function(event){
-					event.preventDefault();
+				var myVar = setInterval(function(){
 					$.getJSON('/vehicle', function(data){
 						console.log('[Update] home: ', options.home_coords, ' vehicle: ', data.position);
 						$('#staticMap img').prop('src', mapboxStatic(fixCoords(data.position), options));
 						$('#lat').val(data.position[0]);
 						$('#lon').val(data.position[1]);
 					});
-				});
+				}, 1000);
 			}(jQuery));
 		</script>
 	</body>
