@@ -1,0 +1,39 @@
+env:
+  global:
+    - SITL_SPEEDUP=10
+    - SITL_RATE=200
+
+python:
+  - "2.7"
+
+install:
+  - 'sudo pip install . -UI'
+  - 'sudo pip install -r requirements.txt -UI'
+
+script:
+  - 'nosetests -svx dronekit.test.unit'
+  - 'nosetests -svx dronekit.test.sitl'
+
+git:
+  depth: 10
+
+language: objective-c
+
+notifications:
+  email: false
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/f3f81b74f930dac9583a
+    on_success: change
+    on_failure: always
+    on_start: never
+
+matrix:
+  fast_finish: true
+
+branches:
+  only:
+    - master
+    - patch
+    - major
+    - minor
