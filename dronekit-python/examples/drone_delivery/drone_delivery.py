@@ -18,6 +18,7 @@ from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelativ
 import cherrypy
 from cherrypy.process import wspbus, plugins
 from jinja2 import Environment, FileSystemLoader
+from mapbox import Geocoder
 
 #Set up option parsing to get connection string
 import argparse
