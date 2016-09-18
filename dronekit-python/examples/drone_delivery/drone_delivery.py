@@ -173,6 +173,7 @@ class Templates:
                 'menu': [
                     {'name': 'Home', 'location': '/'},
                     {'name': 'Track', 'location': '/track'},
+                    {'name': 'Order', 'location': '/order'}
                     ],
                 'current_url': '/',
                 'json': ''
@@ -183,6 +184,12 @@ class Templates:
         self.options['current_url'] = '/'
         self.options['current_coords'] = current_coords
         return self.get_template('index')
+
+    def order(self, current_coords):
+        self.options = self.get_options()
+        self.options['current_url'] = '/order'
+        self.options['current_coords'] = current_coords
+        return self.get_template('order')
 
     def track(self, current_coords, lat, lon, name, medicine):
         self.options = self.get_options()
@@ -213,6 +220,10 @@ class DroneDelivery(object):
     @cherrypy.expose
     def index(self):
         return self.templates.index(self.drone.get_location())
+
+    @cherrypy.expose
+    def order(self):
+        return self.templates.order(self.drone.get_location())
 
     @cherrypy.expose
     def command(self):
