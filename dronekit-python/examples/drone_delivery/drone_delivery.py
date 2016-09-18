@@ -143,6 +143,17 @@ http://localhost:8080/
                 )
             )
         self.vehicle.flush()
+
+    def convert_street_to_geolocation(args):
+        geocoder = Geocoder()
+        response = geocoder.forward(street_address) #input
+        print "[DEBUG]: street to geolocation: " + response
+
+    def convert_geolocation_to_street(self):
+        response = geocoder.reverse(lon=self.current_location.lon, lat=self.current_location.lat)
+        print "[DEBUG]: golocation to street: " + response
+
+
     def get_location(self):
         return [self.current_location.lat, self.current_location.lon]
 
