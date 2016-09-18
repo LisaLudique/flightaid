@@ -141,6 +141,13 @@ html, body {
   float: left;
   height: 100%;
 }
+.slider-wrapper .trackslides-container {
+  position: relative;
+  width: 80%;
+  float: left;
+  height: 140%;
+}
+
 .slider-wrapper .slide {
   position: absolute;
   display: block;
