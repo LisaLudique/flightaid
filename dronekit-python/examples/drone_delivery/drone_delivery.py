@@ -58,6 +58,7 @@ class Drone(object):
         # Connect to the Vehicle
         self._log('Connected to vehicle.')
         self.vehicle = vehicle
+        self.vehicle.airspeed=3
         self.commands = self.vehicle.commands
         self.current_coords = []
         self.webserver_enabled = server_enabled
@@ -142,7 +143,6 @@ http://localhost:8080/
                 )
             )
         self.vehicle.flush()
-
     def get_location(self):
         return [self.current_location.lat, self.current_location.lon]
 
@@ -184,10 +184,14 @@ class Templates:
         self.options['current_coords'] = current_coords
         return self.get_template('index')
 
-    def track(self, current_coords):
+    def track(self, current_coords, lat, lon, name, medicine):
         self.options = self.get_options()
         self.options['current_url'] = '/track'
         self.options['current_coords'] = current_coords
+        self.options['goal_lat'] = lat
+        self.options['goal_lon'] = lon
+        self.options['name'] = name
+        self.options['medicine'] = medicine
         self.options['json'] = simplejson.dumps(self.options)
         return self.get_template('track')
 
@@ -226,7 +230,7 @@ class DroneDelivery(object):
         if(lat is not None and lon is not None):
             self.drone.goto([lat, lon], True)
 
-        return self.templates.track(self.drone.get_location())
+        return self.templates.track(self.drone.get_location(), lat, lon, name, medicine)
 
 
 # Connect to the Vehicle
